@@ -1,0 +1,224 @@
+<!-----------------------------------------------------------SETUP------------------------------------------------------------------>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Meta-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Page title-->
+    <title>Decrypter by Gracie Hutchins</title>
+
+    <!--Links css to html-->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Extra -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<!-------------------------------------------------------------BODY----------------------------------------------------------------->
+<body>
+    <div class="container">
+        <!---------------------------------Main title--------------------------------->
+        <header>
+            <h1><span class="gradient-text">The Ultimate  Decrypter / Encrypter</span></h1>
+            <p class="subtitle">Help with UI fom Claude and Coded by Gracie (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧</p>
+        </header>
+        <!---------------------------------Navigation bar--------------------------------->
+        <nav>
+            <ul class="cipher-tabs">
+                <li class="active" data-cipher="caesar">Caesar</li>
+                <li data-cipher="atbash">Atbash</li>
+                <li data-cipher="hexdec">Hex/Dec</li>
+                <li data-cipher="binary">Binary</li>
+                <li data-cipher="base64">Base64</li>
+                <li data-cipher="morse">Morse Code</li>
+                <li data-cipher="rot13">ROT13</li>
+            </ul>
+        </nav>
+        <div class="cipher-container">
+<!-----------------------------------------------------------CAESAR CYPHER--------------------------------------------------------->
+            <!--Caesar Cipher Panel-->
+            <div class="cipher-panel active" id="caesar-panel">
+
+                <!--Information about the cyphers/how to use-->
+                <div class="info-box">
+                    <h2>Caesar Cipher</h2>
+
+                    <!--Infomation-->
+                    <p>The Caesar Cipher is a famous cipher made and named after Julius Caesar. Caesar used this encryption method in the military to send messages without enemies being able to decrypt them. This method takes a number, or key, and whatever the number is, it determines how many places the letters shift. So if you had the word 'Hello' and the key was one, the finished encrypted message would be 'Ifmmp'.</p>
+                </div>
+
+                <!--Placeholders-->
+                <div class="input-container">
+                    <textarea placeholder="Enter text to encrypt/decrypt here! ٩(◕‿◕)۶" id="caesar-input"></textarea>
+                    <div class="controls">
+
+                        <!--Number of times to shift-->
+                        <div class="shift-control">
+                            <label for="shift-input">Key (or the number of times you want to shift the letters):</label>
+                            <input type="number" id="shift-input" value="3" min="-25" max="25">
+                        </div>
+
+                        <!--Button-->
+                        <button id="caesar-button" class="process-btn">Decrypt/encrypt Message</button>
+                    </div>
+                </div>
+
+                <!--Output-->
+                <div class="output-container">
+                    <h3>Result:</h3>
+                    <div class="result" id="caesar-result"></div>
+                    <button class="copy-btn" data-result="caesar-result">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+
+            <!--Code box-->
+            <div class="code-display-container">
+                <div class="code-header">
+                  <h3>(◕‿◕) Here's the code:</h3>
+                  <button class="copy-btn" id="code-copy-btn">
+                    <i class="fas fa-copy"></i> Copy Code
+                  </button>
+                </div>
+                <pre class="code-content"><code id="cipher-code">function caesar_cipher(str, num){
+                  var lowerCaseStr = str.toLowerCase();
+                  var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+                  var newStr = '';
+                  
+                  for (var i = 0; i < lowerCaseStr.length; i++){
+                      var currentLetter = lowerCaseStr[i];
+                      if (currentLetter === ' '){
+                          newStr += currentLetter;
+                          continue;
+                      }
+                      var currentIndex = alphabet.indexOf(currentLetter);
+                      if (currentIndex === -1) {
+                          newStr += currentLetter;
+                          continue;
+                      }
+                      var newIndex = (currentIndex + num) % 26;
+                      if (newIndex < 0) newIndex += 26;
+                      if (str[i] === str[i].toUpperCase()) {
+                          newStr += alphabet[newIndex].toUpperCase();
+                      }
+                      else newStr += alphabet[newIndex];
+                  }
+                  return newStr;    
+              }</code></pre>
+              </div>
+              <div class="info-box">
+                <h2>Sources:</h2>
+                <p>
+                    https://dev.to/cerchie/writing-a-caesar-shift-cipher-function-with-javascript-27eh <br>
+                    https://www.sciencedirect.com/topics/computer-science/caesar-cipher#:~:text=The%20Caesar%20cipher%20is%20based,shifts%20in%20the%20opposite%20direction. <br>
+                    https://en.wikipedia.org/wiki/Caesar_cipher <br>
+                    https://www.youtube.com/watch?v=M15LVmGe8-w <br>
+                    https://cryptii.com/pipes/caesar-cipher <br>
+                </p>
+              </div>
+            </div>
+<!--------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------------ATBASH CIPHER------------------------------------------------------------->
+            <!-- Atbash Cipher Panel -->
+            <div class="cipher-panel" id="atbash-panel">
+                <div class="info-box">
+                    <h2>Atbash Cipher</h2>
+                    <p>Substitution cipher replacing each letter with its counterpart from the other end of the alphabet.</p>
+                </div>
+                <div class="input-container">
+                    <textarea placeholder="Enter text to encrypt/decrypt..." id="atbash-input"></textarea>
+                    <div class="controls">
+                        <button id="atbash-button" class="process-btn">Process</button>
+                    </div>
+                </div>
+                <div class="output-container">
+                    <h3>Result:</h3>
+                    <div class="result" id="atbash-result"></div>
+                    <button class="copy-btn" data-result="atbash-result">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Placeholder for other cipher panels -->
+            <div class="cipher-panel" id="hexdec-panel">
+                <div class="info-box">
+                    <h2>Hex/Dec Conversion</h2>
+                    <p>Convert between hex and decimal.</p>
+                </div>
+                <div class="input-container">
+                    <textarea placeholder="Coming soon..." disabled></textarea>
+                    <div class="controls">
+                        <button class="process-btn disabled">Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cipher-panel" id="binary-panel">
+                <div class="info-box">
+                    <h2>Binary Conversion</h2>
+                    <p>Convert text to/from binary.</p>
+                </div>
+                <div class="input-container">
+                    <textarea placeholder="Coming soon..." disabled></textarea>
+                    <div class="controls">
+                        <button class="process-btn disabled">Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cipher-panel" id="base64-panel">
+                <div class="info-box">
+                    <h2>Base64 Encoding/Decoding</h2>
+                    <p>Encode/decode using Base64.</p>
+                </div>
+                <div class="input-container">
+                    <textarea placeholder="Coming soon..." disabled></textarea>
+                    <div class="controls">
+                        <button class="process-btn disabled">Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cipher-panel" id="morse-panel">
+                <div class="info-box">
+                    <h2>Morse Code</h2>
+                    <p>Convert text to/from Morse code.</p>
+                </div>
+                <div class="input-container">
+                    <textarea placeholder="Coming soon..." disabled></textarea>
+                    <div class="controls">
+                        <button class="process-btn disabled">Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cipher-panel" id="rot13-panel">
+                <div class="info-box">
+                    <h2>ROT13 Cipher</h2>
+                    <p>Shifts letters 13 places in alphabet.</p>
+                </div>
+                <div class="input-container">
+                    <textarea placeholder="Coming soon..." disabled></textarea>
+                    <div class="controls">
+                        <button class="process-btn disabled">Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="socials">
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>© 2025 Gracie Hutchins. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

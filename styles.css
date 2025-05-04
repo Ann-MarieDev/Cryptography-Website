@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+    --primary: #00b894;
+    --secondary: #00cec9;
+    --background: #f8f9fa;
+    --dark: #343a40;
+    --light: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --border: #e9ecef;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--background);
+    color: var(--dark);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.gradient-text {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 300;
+}
+
+/* Tabs Navigation */
+.cipher-tabs {
+    display: flex;
+    list-style: none;
+    background: var(--light);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px var(--shadow);
+    overflow: hidden;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.cipher-tabs li {
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.cipher-tabs li:hover {
+    background: rgba(0, 184, 148, 0.1);
+}
+
+.cipher-tabs li.active {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: white;
+}
+
+/* Cipher Panels */
+.cipher-panel {
+    display: none;
+    background: var(--light);
+    padding: 0.9rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.cipher-panel.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.info-box {
+    margin-bottom: 0.7rem;
+    padding: 0.5rem;
+    background: rgba(0, 184, 148, 0.05);
+    border-left: 4px solid var(--primary);
+    border-radius: 5px;
+    font-size: 0.85rem;
+}
+
+.info-box h2 {
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+}
+
+.input-container {
+    margin-bottom: 1.5rem;
+}
+
+textarea {
+    width: 100%;
+    min-height: 70px;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    resize: vertical;
+    transition: border 0.3s ease;
+    margin-bottom: 0.5rem;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.shift-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.shift-control input {
+    width: 60px;
+    padding: 0.4rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.process-btn {
+    padding: 0.5rem 1.2rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.process-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.process-btn.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.output-container {
+    background: #f8f9fa;
+    padding: 0.7rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+.output-container h3 {
+    margin-bottom: 0.3rem;
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.result {
+    min-height: 50px;
+    padding: 0.5rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    font-size: 0.9rem;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    padding: 0.3rem 0.7rem;
+    background: rgba(0, 184, 148, 0.1);
+    border: 1px solid rgba(0, 184, 148, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+}
+
+.copy-btn:hover {
+    background: rgba(0, 184, 148, 0.2);
+}
+
+footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.social-icon {
+    font-size: 1.2rem;
+    color: var(--dark);
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    color: var(--primary);
+    transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cipher-tabs {
+        flex-direction: column;
+    }
+
+    .cipher-tabs li {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .cipher-tabs li:last-child {
+        border-bottom: none;
+    }
+
+    .cipher-panel {
+        padding: 1.5rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .process-btn {
+        width: 100%;
+    }
+}
+
+.code-display-container {
+    background: var(--light);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px var(--shadow);
+    margin: 1.5rem 0;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    position: relative;
+  }
+  
+  .code-header h3 {
+    color: white;
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .code-content {
+    padding: 0.7rem;
+    margin: 0;
+    overflow-x: auto;
+    background: #f8f9fa;
+    border: 1px solid var(--border);
+    border-radius: 0 0 8px 8px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  #cipher-code {
+    white-space: pre;
+    color: var(--dark);
+  }
+  
+  /* Copy Button Matches  Theme */
+  #code-copy-btn {
+    padding: 0.3rem 0.7rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  #code-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Add responsive styles to theme */
+  @media (max-width: 768px) {
+    .code-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    
+    #code-copy-btn {
+      align-self: flex-end;
+    }
+  }

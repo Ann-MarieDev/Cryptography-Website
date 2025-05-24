@@ -67,6 +67,26 @@ document.addEventListener('DOMContentLoaded', function() {
         atbashResult.textContent = result;
     });
 
+    //-------------------------------ROT13 Cipher-------------------------------
+    // Connects ROT13 UI elements and runs your function on click
+    const rot13Button = document.getElementById('rot13-button');
+    const rot13Input = document.getElementById('rot13-input');
+    const rot13Result = document.getElementById('rot13-result');
+
+    if (rot13Button) {
+        rot13Button.addEventListener('click', () => {
+            // get input from textarea
+            const userStrRot13 = rot13Input.value;
+            if (!userStrRot13) {
+                rot13Result.textContent = 'Please enter text to encrypt/decrypt.';
+                return;
+            }
+            // run rot13 and output (toUpperCase for consistency with your sample)
+            const result = rot13(userStrRot13.toUpperCase());
+            rot13Result.textContent = result;
+        });
+    }
+
     //-------------------------------Copy button for results-------------------------------
     const copyButtons = document.querySelectorAll('.copy-btn');
     
@@ -195,7 +215,29 @@ function mores_code(){
     null;
 }
 
+/*----------------------------ROT 13-------------------------------------------
+Your original ROT13 code and comments
+-----------------------------------------------------------------------------*/
 // rot 13
-function rot13(){
-    null;
+let input = "HELLO WORLD";
+function rot13(text){
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let letter = text[i];
+        let code = text.charCodeAt(i);
+
+        if (code >= 65 && code <= 90){
+            if (code + 13 > 90) {
+                code = code -13;
+            } else {
+                code = code +13;
+            }
+            result += String.fromCharCode(code);
+        } else {
+            result += letter;
+        }
+    }
+    return result;
 }
+let output = rot13(input);
+console.log(output);

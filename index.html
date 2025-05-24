@@ -94,6 +94,17 @@
   return newStr;    
 }</code></pre>
                 </div>
+                <!--Sources already present-->
+                <div class="info-box">
+                    <h2>Sources:</h2>
+                    <ul>
+                        <li><a href="https://dev.to/cerchie/writing-a-caesar-shift-cipher-function-with-javascript-27eh" target="_blank">dev.to Caesar Cipher Tutorial</a></li>
+                        <li><a href="https://www.sciencedirect.com/topics/computer-science/caesar-cipher" target="_blank">ScienceDirect: Caesar Cipher</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Caesar_cipher" target="_blank">Wikipedia: Caesar Cipher</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=M15LVmGe8-w" target="_blank">YouTube: Caesar Cipher</a></li>
+                        <li><a href="https://cryptii.com/pipes/caesar-cipher" target="_blank">Cryptii: Caesar Cipher Tool</a></li>
+                    </ul>
+                </div>
             </div>
 <!--------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------ATBASH CIPHER------------------------------------------------------------->
@@ -116,6 +127,15 @@
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
+                <!-- OFFICIAL SOURCES -->
+                <div class="info-box">
+                    <h2>Sources:</h2>
+                    <ul>
+                        <li><a href="https://en.wikipedia.org/wiki/Atbash" target="_blank">Wikipedia: Atbash cipher</a></li>
+                        <li><a href="https://rumkin.com/tools/cipher/atbash/" target="_blank">Rumkin Atbash Tool</a></li>
+                        <li><a href="https://geeksforgeeks.org/implementing-atbash-cipher/" target="_blank">GeeksforGeeks: Atbash Cipher</a></li>
+                    </ul>
+                </div>
             </div>
 <!--------------------------------------------------------HEX/DEC CIPHER----------------------------------------------------------->
             <!-- Hex/Dec Cipher Panel -->
@@ -129,13 +149,9 @@
                 <div class="input-container">
                     <textarea placeholder="Enter text, hex, or decimal here!" id="hex-input"></textarea>
                     <div class="controls" style="flex-wrap: wrap;">
-                        <!--Text to Hex Button-->
                         <button id="to-hex-btn" class="process-btn">Text to Hex</button>
-                        <!--Hex to Text Button-->
                         <button id="from-hex-btn" class="process-btn">Hex to Text</button>
-                        <!--Text to Dec Button-->
                         <button id="to-dec-btn" class="process-btn">Text to Dec</button>
-                        <!--Dec to Text Button-->
                         <button id="from-dec-btn" class="process-btn">Dec to Text</button>
                     </div>
                 </div>
@@ -147,36 +163,17 @@
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
-                <!--Code box-->
-                <div class="code-display-container">
-                    <div class="code-header">
-                        <h3>(◕‿◕) Here's the code:</h3>
-                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('hex-code').textContent)">
-                            <i class="fas fa-copy"></i> Copy Code
-                        </button>
-                    </div>
-                    <pre class="code-content"><code id="hex-code">
-function textToHex(text) {
-  return text.split('').map(
-    c => c.charCodeAt(0).toString(16).padStart(2, '0')
-  ).join(' ');
-}
-function hexToText(hex) {
-  return hex.split(' ').map(
-    h => String.fromCharCode(parseInt(h, 16))
-  ).join('');
-}
-function textToDec(text) {
-  return text.split('').map(
-    c => c.charCodeAt(0).toString(10)
-  ).join(' ');
-}
-function decToText(dec) {
-  return dec.split(' ').map(
-    d => String.fromCharCode(parseInt(d, 10))
-  ).join('');
-}
-                    </code></pre>
+                <!-- OFFICIAL SOURCES -->
+                <div class="info-box">
+                    <h2>Sources:</h2>
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString" target="_blank">MDN: Number.prototype.toString()</a></li>
+                        <li><a href="https://www.unicode.org/" target="_blank">Unicode Consortium</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Hexadecimal" target="_blank">Wikipedia: Hexadecimal</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Binary_number" target="_blank">Wikipedia: Binary Number</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/ASCII" target="_blank">Wikipedia: ASCII</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Decimal" target="_blank">Wikipedia: Decimal</a></li>
+                    </ul>
                 </div>
             </div>
 <!--------------------------------------------------------BINARY CIPHER------------------------------------------------------------>
@@ -200,6 +197,15 @@ function decToText(dec) {
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
+                <!-- OFFICIAL SOURCES -->
+                <div class="info-box">
+                    <h2>Sources:</h2>
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString" target="_blank">MDN: Number.prototype.toString()</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Binary_number" target="_blank">Wikipedia: Binary Number</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/ASCII" target="_blank">Wikipedia: ASCII</a></li>
+                    </ul>
+                </div>
             </div>
 <!-------------------------------------------------------MORSE CODE CYPHER--------------------------------------------------------->
             <!-- Morse Code Cipher Panel -->
@@ -222,6 +228,15 @@ function decToText(dec) {
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
+                <!-- OFFICIAL SOURCES -->
+                <div class="info-box">
+                    <h2>Sources:</h2>
+                    <ul>
+                        <li><a href="https://en.wikipedia.org/wiki/Morse_code" target="_blank">Wikipedia: Morse Code</a></li>
+                        <li><a href="https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1677-1-200910-I!!PDF-E.pdf" target="_blank">ITU: International Morse Code (PDF)</a></li>
+                        <li><a href="https://www.arrl.org/morse-code" target="_blank">ARRL: Morse Code</a></li>
+                    </ul>
+                </div>
             </div>
 <!----------------------------------------------------------ROT13 CIPHER----------------------------------------------------------->
             <!-- ROT13 Cipher Panel -->
@@ -242,6 +257,15 @@ function decToText(dec) {
                     <button class="copy-btn" data-result="rot13-result">
                         <i class="fas fa-copy"></i> Copy
                     </button>
+                </div>
+                <!-- OFFICIAL SOURCES -->
+                <div class="info-box">
+                    <h2>Sources:</h2>
+                    <ul>
+                        <li><a href="https://en.wikipedia.org/wiki/ROT13" target="_blank">Wikipedia: ROT13</a></li>
+                        <li><a href="https://datatracker.ietf.org/doc/html/rfc1321#section-9" target="_blank">RFC 1321 (mentions ROT13)</a></li>
+                        <li><a href="https://practicalcryptography.com/ciphers/rot13-cipher/" target="_blank">Practical Cryptography: ROT13</a></li>
+                    </ul>
                 </div>
             </div>
 <!------------------------------------------------------------------------------------------------------------------------------->

@@ -3,7 +3,33 @@
                             By Gracie Hutchins
 ------------------------------------------------------------------------------*/
 
-//----------------------------Connect JS to HTML-------------------------------
+//----------------------------Morse Code Logic-----------------------------------
+const morse = {
+  "A": ".-","B": "-...","C": "-.-.","D": "-..","E": ".","F": "..-.","G": "--.","H": "....","I": "..",
+  "J": ".---","K": "-.-","L": ".-..","M": "--","N": "-.","O": "---","P": ".--.","Q": "--.-","R": ".-.",
+  "S": "...","T": "-","U": "..-","V": "...-","W": ".--","X": "-..-","Y": "-.--","Z": "--..",
+  "0": "-----","1": ".----","2": "..---","3": "...--","4": "....-","5": ".....","6": "-....",
+  "7": "--...","8": "---..","9": "----."," ": "/",
+  ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.", "!": "-.-.--", "/": "-..-.", 
+  "(": "-.--.", ")": "-.--.-", "&": ".-...", ":": "---...", ";": "-.-.-.", "=": "-...-", 
+  "+": ".-.-.", "-": "-....-", "_": "..--.-", '"': ".-..-.", "$": "...-..-", "@": ".--.-."
+};
+
+const textFromMorse = {};
+for (let k in morse) textFromMorse[morse[k]] = k;
+
+function textToMorse(text) {
+  return text.toUpperCase().split('').map(c => morse[c] || '').join(' ').replace(/ +/g, ' ').trim();
+}
+
+function morseToText(code) {
+  return code.split(' ').map(c => textFromMorse[c] || '').join('').replace(/\//g, ' ');
+}
+
+/*------------------------------------------------------------------------------
+                                DOMContentLoaded
+------------------------------------------------------------------------------*/
+
 document.addEventListener('DOMContentLoaded', function() {
     const tabs = document.querySelectorAll('.cipher-tabs li');
     const panels = document.querySelectorAll('.cipher-panel');
@@ -37,13 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
         caesarResult.textContent = result;
     });
 
-    // For the code copy and paste 
     document.getElementById('code-copy-btn').addEventListener('click', function() {
         const codeText = document.getElementById('cipher-code').textContent;
         navigator.clipboard.writeText(codeText).then(() => {
           const originalText = this.innerHTML;
           this.innerHTML = '<i class="fas fa-check"></i> Copied!';
-          
           setTimeout(() => {
             this.innerHTML = originalText;
           }, 2000);
@@ -67,16 +91,14 @@ document.addEventListener('DOMContentLoaded', function() {
         atbashResult.textContent = result;
     });
 
-    //-------------------------------Morse Code Cipher-------------------------------
-    // Connects Morse Code UI elements and runs functions on click
+    //----------------------------Morse Code-----------------------------------
     const morseInput = document.getElementById('morse-input');
     const toMorseBtn = document.getElementById('to-morse-btn');
     const fromMorseBtn = document.getElementById('from-morse-btn');
     const morseResult = document.getElementById('morse-result');
 
     if (toMorseBtn) {
-        toMorseBtn.addEventListener('click', () => {
-            // Convert text to Morse code
+        toMorseBtn.addEventListener('click', function() {
             const input = morseInput.value;
             if (!input) {
                 morseResult.textContent = 'Please enter text to convert to Morse.';
@@ -87,8 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (fromMorseBtn) {
-        fromMorseBtn.addEventListener('click', () => {
-            // Convert Morse code to text
+        fromMorseBtn.addEventListener('click', function() {
             const input = morseInput.value;
             if (!input) {
                 morseResult.textContent = 'Please enter morse code to convert to text.';
@@ -99,20 +120,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     //-------------------------------ROT13 Cipher-------------------------------
-    // Connects ROT13 UI elements and runs your function on click
     const rot13Button = document.getElementById('rot13-button');
     const rot13Input = document.getElementById('rot13-input');
     const rot13Result = document.getElementById('rot13-result');
 
     if (rot13Button) {
         rot13Button.addEventListener('click', () => {
-            // get input from textarea
             const userStrRot13 = rot13Input.value;
             if (!userStrRot13) {
                 rot13Result.textContent = 'Please enter text to encrypt/decrypt.';
                 return;
             }
-            // run rot13 and output (toUpperCase for consistency with your sample)
             const result = rot13(userStrRot13.toUpperCase());
             rot13Result.textContent = result;
         });
@@ -130,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 navigator.clipboard.writeText(resultText).then(() => {
                     const originalText = button.innerHTML;
                     button.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                    
                     setTimeout(() => {
                         button.innerHTML = originalText;
                     }, 2000);
@@ -205,11 +222,9 @@ function atbash(user_str_atbash) {
   let cipher = '';
   for (let letter of user_str_atbash) {
     if (letter !== ' ') {
-      // If it's a letter in our alphabet, substitute it
       if (alphebet_atbash[letter]) {
         cipher += alphebet_atbash[letter];
       } else {
-        // If it's not in our alphabet (numbers, symbols), keep it as is
         cipher += letter;
       }
     } else {
@@ -236,39 +251,6 @@ function binary(){
     null;
 }
 
-//morse code
-/*----------------------------MORSE CODE----------------------------------------
-Your Morse code logic as you provided
-------------------------------------------------------------------------------*/
-const morse = {
-  "A": ".-","B": "-...","C": "-.-.","D": "-..","E": ".","F": "..-.","G": "--.","H": "....","I": "..",
-  "J": ".---","K": "-.-","L": ".-..","M": "--","N": "-.","O": "---","P": ".--.","Q": "--.-","R": ".-.",
-  "S": "...","T": "-","U": "..-","V": "...-","W": ".--","X": "-..-","Y": "-.--","Z": "--..",
-  "0": "-----","1": ".----","2": "..---","3": "...--","4": "....-","5": ".....","6": "-....",
-  "7": "--...","8": "---..","9": "----."," ": "/",
-  ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.", "!": "-.-.--", "/": "-..-.", 
-  "(": "-.--.", ")": "-.--.-", "&": ".-...", ":": "---...", ";": "-.-.-.", "=": "-...-", 
-  "+": ".-.-.", "-": "-....-", "_": "..--.-", '"': ".-..-.", "$": "...-..-", "@": ".--.-."
-};
-
-const textFromMorse = {};
-for (let k in morse) textFromMorse[morse[k]] = k;
-
-function textToMorse(text) {
-  return text.toUpperCase().split('').map(c => morse[c] || '').join(' ').replace(/ +/g, ' ').trim();
-}
-
-function morseToText(code) {
-  return code.split(' ').map(c => textFromMorse[c] || '').join('').replace(/\//g, ' ');
-}
-
-// Example usage:
-console.log(textToMorse("Morse code!"));
-console.log(morseToText("-- --- .-. ... . / -.-. --- -.. . -.-.--"));
-
-/*----------------------------ROT 13-------------------------------------------
-Your original ROT13 code and comments
------------------------------------------------------------------------------*/
 // rot 13
 let input = "HELLO WORLD";
 function rot13(text){

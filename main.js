@@ -9,12 +9,13 @@ function textToHex(text) {
     c => c.charCodeAt(0).toString(16).padStart(2, '0')
   ).join(' ');
 }
-
 function hexToText(hex) {
   return hex.split(' ').map(
     h => String.fromCharCode(parseInt(h, 16))
   ).join('');
 }
+console.log(textToHex("Hello!"));
+console.log(hexToText("48 65 6c 6c 6f 21"));
 
 /*----------------------------BINARY CONVERTER----------------------------------*/
 function textToBinary(text) {
@@ -22,7 +23,6 @@ function textToBinary(text) {
     c => c.charCodeAt(0).toString(2).padStart(8, '0')
   ).join(' ');
 }
-
 function binaryToText(binary) {
   return binary.split(' ').map(
     b => String.fromCharCode(parseInt(b, 2))
@@ -35,7 +35,6 @@ function textToDec(text) {
     c => c.charCodeAt(0).toString(10)
   ).join(' ');
 }
-
 function decToText(dec) {
   return dec.split(' ').map(
     d => String.fromCharCode(parseInt(d, 10))
@@ -123,7 +122,6 @@ function caesar_cipher(str, num){
 }
 
 /*----------------------------ATBASH CIPHER-------------------------------------*/
-// Alphabet
 let alphebet_atbash = {
 'A': 'Z', 'B': 'Y', 'C': 'X', 'D': 'W', 'E': 'V',
 'F': 'U', 'G': 'T', 'H': 'S', 'I': 'R', 'J': 'Q',
@@ -131,7 +129,6 @@ let alphebet_atbash = {
 'P': 'K', 'Q': 'J', 'R': 'I', 'S': 'H', 'T': 'G',
 'U': 'F', 'V': 'E', 'W': 'D', 'X': 'C', 'Y': 'B', 'Z': 'A'
 };
-
 function atbash(user_str_atbash) {
   let cipher = '';
   for (let letter of user_str_atbash) {
@@ -169,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Caesar Cipher
+    //-------------------------------Caesar Cipher-------------------------------
     const caesarButton = document.getElementById('caesar-button');
     const caesarInput = document.getElementById('caesar-input');
     const shiftInput = document.getElementById('shift-input');
@@ -196,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Atbash Cipher
+    //-------------------------------Atbash Cipher-------------------------------
     const atbashButton = document.getElementById('atbash-button');
     const atbashInput = document.getElementById('atbash-input');
     const atbashResult = document.getElementById('atbash-result');
@@ -210,12 +207,10 @@ document.addEventListener('DOMContentLoaded', function() {
         atbashResult.textContent = result;
     });
 
-    // Hex/Dec Panel
+    //-------------------------------Hex Cipher-------------------------------
     const hexInput = document.getElementById('hex-input');
     const toHexBtn = document.getElementById('to-hex-btn');
     const fromHexBtn = document.getElementById('from-hex-btn');
-    const toDecBtn = document.getElementById('to-dec-btn');
-    const fromDecBtn = document.getElementById('from-dec-btn');
     const hexResult = document.getElementById('hex-result');
 
     if (toHexBtn) {
@@ -238,28 +233,8 @@ document.addEventListener('DOMContentLoaded', function() {
             hexResult.textContent = hexToText(input);
         });
     }
-    if (toDecBtn) {
-        toDecBtn.addEventListener('click', function() {
-            const input = hexInput.value;
-            if (!input) {
-                hexResult.textContent = 'Please enter text to convert to decimal.';
-                return;
-            }
-            hexResult.textContent = textToDec(input);
-        });
-    }
-    if (fromDecBtn) {
-        fromDecBtn.addEventListener('click', function() {
-            const input = hexInput.value;
-            if (!input) {
-                hexResult.textContent = 'Please enter decimal to convert to text.';
-                return;
-            }
-            hexResult.textContent = decToText(input);
-        });
-    }
 
-    // Binary Panel
+    //-------------------------------Binary Cipher-------------------------------
     const binaryInput = document.getElementById('binary-input');
     const toBinaryBtn = document.getElementById('to-binary-btn');
     const fromBinaryBtn = document.getElementById('from-binary-btn');
@@ -285,7 +260,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Morse Code Panel
+    //-------------------------------Decimal Cipher-------------------------------
+    const toDecBtn = document.getElementById('to-dec-btn');
+    const fromDecBtn = document.getElementById('from-dec-btn');
+    if (toDecBtn) {
+        toDecBtn.addEventListener('click', function() {
+            const input = hexInput.value;
+            if (!input) {
+                hexResult.textContent = 'Please enter text to convert to decimal.';
+                return;
+            }
+            hexResult.textContent = textToDec(input);
+        });
+    }
+    if (fromDecBtn) {
+        fromDecBtn.addEventListener('click', function() {
+            const input = hexInput.value;
+            if (!input) {
+                hexResult.textContent = 'Please enter decimal to convert to text.';
+                return;
+            }
+            hexResult.textContent = decToText(input);
+        });
+    }
+
+    //-------------------------------Morse Code Cipher-------------------------------
     const morseInput = document.getElementById('morse-input');
     const toMorseBtn = document.getElementById('to-morse-btn');
     const fromMorseBtn = document.getElementById('from-morse-btn');
@@ -311,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ROT13 Panel
+    //-------------------------------ROT13 Cipher-------------------------------
     const rot13Button = document.getElementById('rot13-button');
     const rot13Input = document.getElementById('rot13-input');
     const rot13Result = document.getElementById('rot13-result');
@@ -327,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Copy result buttons
+    //-------------------------------Copy button for results-------------------------------
     const copyButtons = document.querySelectorAll('.copy-btn');
     copyButtons.forEach(button => {
         button.addEventListener('click', () => {

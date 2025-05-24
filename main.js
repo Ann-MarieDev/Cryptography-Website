@@ -67,6 +67,37 @@ document.addEventListener('DOMContentLoaded', function() {
         atbashResult.textContent = result;
     });
 
+    //-------------------------------Morse Code Cipher-------------------------------
+    // Connects Morse Code UI elements and runs functions on click
+    const morseInput = document.getElementById('morse-input');
+    const toMorseBtn = document.getElementById('to-morse-btn');
+    const fromMorseBtn = document.getElementById('from-morse-btn');
+    const morseResult = document.getElementById('morse-result');
+
+    if (toMorseBtn) {
+        toMorseBtn.addEventListener('click', () => {
+            // Convert text to Morse code
+            const input = morseInput.value;
+            if (!input) {
+                morseResult.textContent = 'Please enter text to convert to Morse.';
+                return;
+            }
+            morseResult.textContent = textToMorse(input);
+        });
+    }
+
+    if (fromMorseBtn) {
+        fromMorseBtn.addEventListener('click', () => {
+            // Convert Morse code to text
+            const input = morseInput.value;
+            if (!input) {
+                morseResult.textContent = 'Please enter morse code to convert to text.';
+                return;
+            }
+            morseResult.textContent = morseToText(input);
+        });
+    }
+
     //-------------------------------ROT13 Cipher-------------------------------
     // Connects ROT13 UI elements and runs your function on click
     const rot13Button = document.getElementById('rot13-button');
@@ -95,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const resultId = button.getAttribute('data-result');
             const resultText = document.getElementById(resultId).textContent;
             
-            if (resultText && resultText !== 'Please enter text to encrypt/decrypt.') {
+            if (resultText && resultText !== 'Please enter text to encrypt/decrypt.' && resultText !== 'Please enter text to convert to Morse.' && resultText !== 'Please enter morse code to convert to text.') {
                 navigator.clipboard.writeText(resultText).then(() => {
                     const originalText = button.innerHTML;
                     button.innerHTML = '<i class="fas fa-check"></i> Copied!';
@@ -205,15 +236,35 @@ function binary(){
     null;
 }
 
-//base64
-function base64(){
-    null;
+//morse code
+/*----------------------------MORSE CODE----------------------------------------
+Your Morse code logic as you provided
+------------------------------------------------------------------------------*/
+const morse = {
+  "A": ".-","B": "-...","C": "-.-.","D": "-..","E": ".","F": "..-.","G": "--.","H": "....","I": "..",
+  "J": ".---","K": "-.-","L": ".-..","M": "--","N": "-.","O": "---","P": ".--.","Q": "--.-","R": ".-.",
+  "S": "...","T": "-","U": "..-","V": "...-","W": ".--","X": "-..-","Y": "-.--","Z": "--..",
+  "0": "-----","1": ".----","2": "..---","3": "...--","4": "....-","5": ".....","6": "-....",
+  "7": "--...","8": "---..","9": "----."," ": "/",
+  ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.", "!": "-.-.--", "/": "-..-.", 
+  "(": "-.--.", ")": "-.--.-", "&": ".-...", ":": "---...", ";": "-.-.-.", "=": "-...-", 
+  "+": ".-.-.", "-": "-....-", "_": "..--.-", '"': ".-..-.", "$": "...-..-", "@": ".--.-."
+};
+
+const textFromMorse = {};
+for (let k in morse) textFromMorse[morse[k]] = k;
+
+function textToMorse(text) {
+  return text.toUpperCase().split('').map(c => morse[c] || '').join(' ').replace(/ +/g, ' ').trim();
 }
 
-//morse code
-function mores_code(){
-    null;
+function morseToText(code) {
+  return code.split(' ').map(c => textFromMorse[c] || '').join('').replace(/\//g, ' ');
 }
+
+// Example usage:
+console.log(textToMorse("Morse code!"));
+console.log(morseToText("-- --- .-. ... . / -.-. --- -.. . -.-.--"));
 
 /*----------------------------ROT 13-------------------------------------------
 Your original ROT13 code and comments

@@ -11,19 +11,14 @@
 
     <!--Links css to html-->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Extra -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<!-------------------------------------------------------------BODY----------------------------------------------------------------->
 <body>
     <div class="container">
-        <!---------------------------------Main title--------------------------------->
         <header>
             <h1><span class="gradient-text">The Ultimate  Decrypter / Encrypter</span></h1>
             <p class="subtitle">Help with UI fom Claude and Coded by Gracie (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧</p>
         </header>
-        <!---------------------------------Navigation bar--------------------------------->
         <nav>
             <ul class="cipher-tabs">
                 <li class="active" data-cipher="caesar">Caesar</li>
@@ -38,32 +33,20 @@
 <!-----------------------------------------------------------CAESAR CYPHER--------------------------------------------------------->
             <!--Caesar Cipher Panel-->
             <div class="cipher-panel active" id="caesar-panel">
-
-                <!--Information about the cyphers/how to use-->
                 <div class="info-box">
                     <h2>Caesar Cipher</h2>
-
-                    <!--Infomation-->
                     <p>The Caesar Cipher is a famous cipher made and named after Julius Caesar. Caesar used this encryption method in the military to send messages without enemies being able to decrypt them. This method takes a number, or key, and whatever the number is, it determines how many places the letters shift. So if you had the word 'Hello' and the key was one, the finished encrypted message would be 'Ifmmp'.</p>
                 </div>
-
-                <!--Placeholders-->
                 <div class="input-container">
                     <textarea placeholder="Enter text to encrypt/decrypt here! ٩(◕‿◕)۶" id="caesar-input"></textarea>
                     <div class="controls">
-
-                        <!--Number of times to shift-->
                         <div class="shift-control">
                             <label for="shift-input">Key (or the number of times you want to shift the letters):</label>
                             <input type="number" id="shift-input" value="3" min="-25" max="25">
                         </div>
-
-                        <!--Button-->
                         <button id="caesar-button" class="process-btn">Decrypt/encrypt Message</button>
                     </div>
                 </div>
-
-                <!--Output-->
                 <div class="output-container">
                     <h3>Result:</h3>
                     <div class="result" id="caesar-result"></div>
@@ -71,55 +54,51 @@
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
-
-            <!--Code box-->
-            <div class="code-display-container">
-                <div class="code-header">
-                  <h3>(◕‿◕) Here's the code:</h3>
-                  <button class="copy-btn" id="code-copy-btn">
-                    <i class="fas fa-copy"></i> Copy Code
-                  </button>
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" id="code-copy-btn">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre class="code-content"><code id="cipher-code">function caesar_cipher(str, num){
+  var lowerCaseStr = str.toLowerCase();
+  var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  var newStr = '';
+  for (var i = 0; i < lowerCaseStr.length; i++){
+      var currentLetter = lowerCaseStr[i];
+      if (currentLetter === ' '){
+          newStr += currentLetter;
+          continue;
+      }
+      var currentIndex = alphabet.indexOf(currentLetter);
+      if (currentIndex === -1) {
+          newStr += currentLetter;
+          continue;
+      }
+      var newIndex = (currentIndex + num) % 26;
+      if (newIndex < 0) newIndex += 26;
+      if (str[i] === str[i].toUpperCase()) {
+          newStr += alphabet[newIndex].toUpperCase();
+      }
+      else newStr += alphabet[newIndex];
+  }
+  return newStr;    
+}</code></pre>
                 </div>
-                <pre class="code-content"><code id="cipher-code">function caesar_cipher(str, num){
-                  var lowerCaseStr = str.toLowerCase();
-                  var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-                  var newStr = '';
-                  
-                  for (var i = 0; i < lowerCaseStr.length; i++){
-                      var currentLetter = lowerCaseStr[i];
-                      if (currentLetter === ' '){
-                          newStr += currentLetter;
-                          continue;
-                      }
-                      var currentIndex = alphabet.indexOf(currentLetter);
-                      if (currentIndex === -1) {
-                          newStr += currentLetter;
-                          continue;
-                      }
-                      var newIndex = (currentIndex + num) % 26;
-                      if (newIndex < 0) newIndex += 26;
-                      if (str[i] === str[i].toUpperCase()) {
-                          newStr += alphabet[newIndex].toUpperCase();
-                      }
-                      else newStr += alphabet[newIndex];
-                  }
-                  return newStr;    
-              }</code></pre>
-              </div>
-              <div class="info-box">
-                <h2>Sources:</h2>
-                <p>
-                    https://dev.to/cerchie/writing-a-caesar-shift-cipher-function-with-javascript-27eh <br>
-                    https://www.sciencedirect.com/topics/computer-science/caesar-cipher#:~:text=The%20Caesar%20cipher%20is%20based,shifts%20in%20the%20opposite%20direction. <br>
-                    https://en.wikipedia.org/wiki/Caesar_cipher <br>
-                    https://www.youtube.com/watch?v=M15LVmGe8-w <br>
-                    https://cryptii.com/pipes/caesar-cipher <br>
-                </p>
-              </div>
+                <div class="info-box">
+                    <h2>Sources:</h2>
+                    <p>
+                        https://dev.to/cerchie/writing-a-caesar-shift-cipher-function-with-javascript-27eh <br>
+                        https://www.sciencedirect.com/topics/computer-science/caesar-cipher#:~:text=The%20Caesar%20cipher%20is%20based,shifts%20in%20the%20opposite%20direction. <br>
+                        https://en.wikipedia.org/wiki/Caesar_cipher <br>
+                        https://www.youtube.com/watch?v=M15LVmGe8-w <br>
+                        https://cryptii.com/pipes/caesar-cipher <br>
+                    </p>
+                </div>
             </div>
 <!--------------------------------------------------------------------------------------------------------------------------------->
 <!-------------------------------------------------------ATBASH CIPHER------------------------------------------------------------->
-            <!-- Atbash Cipher Panel -->
             <div class="cipher-panel" id="atbash-panel">
                 <div class="info-box">
                     <h2>Atbash Cipher</h2>
@@ -139,22 +118,52 @@
                     </button>
                 </div>
             </div>
-
-            <!-- Placeholder for other cipher panels -->
+<!--------------------------------------------------------HEX CYPHER-------------------------------------------------------------->
             <div class="cipher-panel" id="hexdec-panel">
                 <div class="info-box">
                     <h2>Hex/Dec Conversion</h2>
-                    <p>Convert between hex and decimal.</p>
+                    <p>Convert text to/from hexadecimal (space separated, lower case).</p>
                 </div>
                 <div class="input-container">
-                    <textarea placeholder="Coming soon..." disabled></textarea>
+                    <textarea placeholder="Enter text or hex here!" id="hex-input"></textarea>
                     <div class="controls">
-                        <button class="process-btn disabled">Coming Soon</button>
+                        <button id="to-hex-btn" class="process-btn">Text to Hex</button>
+                        <button id="from-hex-btn" class="process-btn">Hex to Text</button>
                     </div>
                 </div>
-            </div>
+                <div class="output-container">
+                    <h3>Result:</h3>
+                    <div class="result" id="hex-result"></div>
+                    <button class="copy-btn" data-result="hex-result">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('hex-code').textContent)">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre class="code-content"><code id="hex-code">
+function textToHex(text) {
+  return text.split('').map(
+    c => c.charCodeAt(0).toString(16).padStart(2, '0')
+  ).join(' ');
+}
 
-<!-----------------------------------------------------------BINARY CYPHER--------------------------------------------------------->
+function hexToText(hex) {
+  return hex.split(' ').map(
+    h => String.fromCharCode(parseInt(h, 16))
+  ).join('');
+}
+
+console.log(textToHex("Hello!"));
+console.log(hexToText("48 65 6c 6c 6f 21"));
+                    </code></pre>
+                </div>
+            </div>
+<!-------------------------------------------------------BINARY CYPHER------------------------------------------------------------->
             <div class="cipher-panel" id="binary-panel">
                 <div class="info-box">
                     <h2>Binary Conversion</h2>
@@ -199,19 +208,12 @@ console.log(binaryToText("01001000 01100101 01101100 01101100 01101111 00100001"
                     </code></pre>
                 </div>
             </div>
-<!------------------------------------------------------------------------------------------------------------------------------->
-
 <!-----------------------------------------------------------MORSE CODE CYPHER--------------------------------------------------------->
-            <!--Morse Code Cipher Panel-->
             <div class="cipher-panel" id="morse-panel">
-
-                <!--Information about the cyphers/how to use-->
                 <div class="info-box">
                     <h2>Morse Code</h2>
                     <p>Convert text to Morse code or Morse code to text. Separate letters by spaces and words by "/".</p>
                 </div>
-
-                <!--Input and controls-->
                 <div class="input-container">
                     <textarea placeholder="Enter text or morse code here!" id="morse-input"></textarea>
                     <div class="controls">
@@ -219,8 +221,6 @@ console.log(binaryToText("01001000 01100101 01101100 01101100 01101111 00100001"
                         <button id="from-morse-btn" class="process-btn">Morse to Text</button>
                     </div>
                 </div>
-
-                <!--Output-->
                 <div class="output-container">
                     <h3>Result:</h3>
                     <div class="result" id="morse-result"></div>
@@ -228,8 +228,6 @@ console.log(binaryToText("01001000 01100101 01101100 01101100 01101111 00100001"
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
-
-                <!--Code box-->
                 <div class="code-display-container">
                     <div class="code-header">
                         <h3>(◕‿◕) Here's the code:</h3>
@@ -260,33 +258,23 @@ function morseToText(code) {
   return code.split(' ').map(c => textFromMorse[c] || '').join('').replace(/\//g, ' ');
 }
 
-// Example usage:
 console.log(textToMorse("Morse code!"));
 console.log(morseToText("-- --- .-. ... . / -.-. --- -.. . -.-.--"));
 </code></pre>
                 </div>
             </div>
-<!------------------------------------------------------------------------------------------------------------------------------->
-
 <!-----------------------------------------------------------ROT13 CYPHER--------------------------------------------------------->
-            <!--ROT13 Cipher Panel-->
             <div class="cipher-panel" id="rot13-panel">
-
-                <!--Information about the cyphers/how to use-->
                 <div class="info-box">
                     <h2>ROT13 Cipher</h2>
                     <p>Shifts letters 13 places in the alphabet. Uppercase only.</p>
                 </div>
-
-                <!--Placeholders-->
                 <div class="input-container">
                     <textarea placeholder="Enter text to encrypt/decrypt here!" id="rot13-input"></textarea>
                     <div class="controls">
                         <button id="rot13-button" class="process-btn">Encrypt/Decrypt</button>
                     </div>
                 </div>
-
-                <!--Output-->
                 <div class="output-container">
                     <h3>Result:</h3>
                     <div class="result" id="rot13-result"></div>
@@ -294,8 +282,6 @@ console.log(morseToText("-- --- .-. ... . / -.-. --- -.. . -.-.--"));
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
-
-                <!--Code box-->
                 <div class="code-display-container">
                     <div class="code-header">
                         <h3>(◕‿◕) Here's the code:</h3>
@@ -330,9 +316,7 @@ console.log(output);
                     </code></pre>
                 </div>
             </div>
-<!------------------------------------------------------------------------------------------------------------------------------->
         </div>
-
         <footer>
             <div class="socials">
                 <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
@@ -343,7 +327,6 @@ console.log(output);
             <p>© 2025 Gracie Hutchins. All rights reserved.</p>
         </footer>
     </div>
-
     <script src="main.js"></script>
 </body>
 </html>

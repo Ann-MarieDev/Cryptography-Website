@@ -30,7 +30,6 @@
                 <li data-cipher="atbash">Atbash</li>
                 <li data-cipher="hexdec">Hex/Dec</li>
                 <li data-cipher="binary">Binary</li>
-                <li data-cipher="base64">Base64</li>
                 <li data-cipher="morse">Morse Code</li>
                 <li data-cipher="rot13">ROT13</li>
             </ul>
@@ -168,31 +167,72 @@
                 </div>
             </div>
 
-            <div class="cipher-panel" id="base64-panel">
-                <div class="info-box">
-                    <h2>Base64 Encoding/Decoding</h2>
-                    <p>Encode/decode using Base64.</p>
-                </div>
-                <div class="input-container">
-                    <textarea placeholder="Coming soon..." disabled></textarea>
-                    <div class="controls">
-                        <button class="process-btn disabled">Coming Soon</button>
-                    </div>
-                </div>
-            </div>
-
+<!-----------------------------------------------------------MORSE CODE CYPHER--------------------------------------------------------->
+            <!--Morse Code Cipher Panel-->
             <div class="cipher-panel" id="morse-panel">
+
+                <!--Information about the cyphers/how to use-->
                 <div class="info-box">
                     <h2>Morse Code</h2>
-                    <p>Convert text to/from Morse code.</p>
+                    <p>Convert text to Morse code or Morse code to text. Separate letters by spaces and words by "/".</p>
                 </div>
+
+                <!--Input and controls-->
                 <div class="input-container">
-                    <textarea placeholder="Coming soon..." disabled></textarea>
+                    <textarea placeholder="Enter text or morse code here!" id="morse-input"></textarea>
                     <div class="controls">
-                        <button class="process-btn disabled">Coming Soon</button>
+                        <button id="to-morse-btn" class="process-btn">Text to Morse</button>
+                        <button id="from-morse-btn" class="process-btn">Morse to Text</button>
                     </div>
                 </div>
+
+                <!--Output-->
+                <div class="output-container">
+                    <h3>Result:</h3>
+                    <div class="result" id="morse-result"></div>
+                    <button class="copy-btn" data-result="morse-result">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+
+                <!--Code box-->
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('morse-code-block').textContent)">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+<pre class="code-content"><code id="morse-code-block">
+const morse = {
+  "A": ".-","B": "-...","C": "-.-.","D": "-..","E": ".","F": "..-.","G": "--.","H": "....","I": "..",
+  "J": ".---","K": "-.-","L": ".-..","M": "--","N": "-.","O": "---","P": ".--.","Q": "--.-","R": ".-.",
+  "S": "...","T": "-","U": "..-","V": "...-","W": ".--","X": "-..-","Y": "-.--","Z": "--..",
+  "0": "-----","1": ".----","2": "..---","3": "...--","4": "....-","5": ".....","6": "-....",
+  "7": "--...","8": "---..","9": "----."," ": "/",
+  ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.", "!": "-.-.--", "/": "-..-.", 
+  "(": "-.--.", ")": "-.--.-", "&": ".-...", ":": "---...", ";": "-.-.-.", "=": "-...-", 
+  "+": ".-.-.", "-": "-....-", "_": "..--.-", '"': ".-..-.", "$": "...-..-", "@": ".--.-."
+};
+
+const textFromMorse = {};
+for (let k in morse) textFromMorse[morse[k]] = k;
+
+function textToMorse(text) {
+  return text.toUpperCase().split('').map(c => morse[c] || '').join(' ').replace(/ +/g, ' ').trim();
+}
+
+function morseToText(code) {
+  return code.split(' ').map(c => textFromMorse[c] || '').join('').replace(/\//g, ' ');
+}
+
+// Example usage:
+console.log(textToMorse("Morse code!"));
+console.log(morseToText("-- --- .-. ... . / -.-. --- -.. . -.-.--"));
+</code></pre>
+                </div>
             </div>
+<!------------------------------------------------------------------------------------------------------------------------------->
 
 <!-----------------------------------------------------------ROT13 CYPHER--------------------------------------------------------->
             <!--ROT13 Cipher Panel-->

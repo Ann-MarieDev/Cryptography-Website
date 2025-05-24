@@ -3,6 +3,21 @@
                             By Gracie Hutchins
 ------------------------------------------------------------------------------*/
 
+function textToHex(text) {
+  return text.split('').map(
+    c => c.charCodeAt(0).toString(16).padStart(2, '0')
+  ).join(' ');
+}
+
+function hexToText(hex) {
+  return hex.split(' ').map(
+    h => String.fromCharCode(parseInt(h, 16))
+  ).join('');
+}
+
+console.log(textToHex("Hello!"));
+console.log(hexToText("48 65 6c 6c 6f 21"));
+
 function textToBinary(text) {
   return text.split('').map(
     c => c.charCodeAt(0).toString(2).padStart(8, '0')
@@ -54,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    //-------------------------------Caesar Cipher-------------------------------
     const caesarButton = document.getElementById('caesar-button');
     const caesarInput = document.getElementById('caesar-input');
     const shiftInput = document.getElementById('shift-input');
@@ -84,24 +98,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       });
 
-    //-------------------------------Atbash Cipher-------------------------------
     const atbashButton = document.getElementById('atbash-button');
     const atbashInput = document.getElementById('atbash-input');
     const atbashResult = document.getElementById('atbash-result');
 
     atbashButton.addEventListener('click', () => {
         const userStrAtbash = atbashInput.value;
-        
         if (!userStrAtbash) {
             atbashResult.textContent = 'Please enter text to encrypt/decrypt.';
             return;
         }
-        
         const result = atbash(userStrAtbash.toUpperCase());
         atbashResult.textContent = result;
     });
 
-    //-------------------------------Binary Cipher-------------------------------
+    const hexInput = document.getElementById('hex-input');
+    const toHexBtn = document.getElementById('to-hex-btn');
+    const fromHexBtn = document.getElementById('from-hex-btn');
+    const hexResult = document.getElementById('hex-result');
+
+    if (toHexBtn) {
+        toHexBtn.addEventListener('click', function() {
+            const input = hexInput.value;
+            if (!input) {
+                hexResult.textContent = 'Please enter text to convert to hex.';
+                return;
+            }
+            hexResult.textContent = textToHex(input);
+        });
+    }
+    if (fromHexBtn) {
+        fromHexBtn.addEventListener('click', function() {
+            const input = hexInput.value;
+            if (!input) {
+                hexResult.textContent = 'Please enter hex to convert to text.';
+                return;
+            }
+            hexResult.textContent = hexToText(input);
+        });
+    }
+
     const binaryInput = document.getElementById('binary-input');
     const toBinaryBtn = document.getElementById('to-binary-btn');
     const fromBinaryBtn = document.getElementById('from-binary-btn');
@@ -129,7 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    //-------------------------------Morse Code Cipher-------------------------------
     const morseInput = document.getElementById('morse-input');
     const toMorseBtn = document.getElementById('to-morse-btn');
     const fromMorseBtn = document.getElementById('from-morse-btn');
@@ -157,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    //-------------------------------ROT13 Cipher-------------------------------
     const rot13Button = document.getElementById('rot13-button');
     const rot13Input = document.getElementById('rot13-input');
     const rot13Result = document.getElementById('rot13-result');
@@ -174,15 +208,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    //-------------------------------Copy button for results-------------------------------
     const copyButtons = document.querySelectorAll('.copy-btn');
-    
     copyButtons.forEach(button => {
         button.addEventListener('click', () => {
             const resultId = button.getAttribute('data-result');
             const resultText = document.getElementById(resultId).textContent;
-            
-            if (resultText && resultText !== 'Please enter text to encrypt/decrypt.' && resultText !== 'Please enter text to convert to Morse.' && resultText !== 'Please enter morse code to convert to text.' && resultText !== 'Please enter text to convert to binary.' && resultText !== 'Please enter binary to convert to text.') {
+            if (resultText && resultText !== 'Please enter text to encrypt/decrypt.' && resultText !== 'Please enter text to convert to Morse.' && resultText !== 'Please enter morse code to convert to text.' && resultText !== 'Please enter text to convert to binary.' && resultText !== 'Please enter binary to convert to text.' && resultText !== 'Please enter text to convert to hex.' && resultText !== 'Please enter hex to convert to text.') {
                 navigator.clipboard.writeText(resultText).then(() => {
                     const originalText = button.innerHTML;
                     button.innerHTML = '<i class="fas fa-check"></i> Copied!';
@@ -195,21 +226,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-/*----------------------------Ceaser Cypher-------------------------------------
-//Info
-alert("The Caesar Cypher is a famous cypher made and named after Julius Caesar. Caesar used this encryption method in the military to send mrssages without enemies being able to decrypt their messages. This methods takes a number, or key and whatever the number is is how many places the letters shift. So if you had the word 'Hello' and the key was one, the finished encryoted message would be 'Ifmmp'");
-
-// Variables
-var userStr = prompt("Enter the string to encode/decode: ");
-var userShift = parseInt(prompt("Enter the shift[key] number (can be negative):"));
-
-// Logic
-*/
 function caesar_cipher(str, num){
     var lowerCaseStr = str.toLowerCase();
     var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
     var newStr = '';
-    
     for (var i = 0; i < lowerCaseStr.length; i++){
         var currentLetter = lowerCaseStr[i];
         if (currentLetter === ' '){
@@ -238,7 +258,7 @@ let alphebet_atbash = {
 'P': 'K', 'Q': 'J', 'R': 'I', 'S': 'H', 'T': 'G',
 'U': 'F', 'V': 'E', 'W': 'D', 'X': 'C', 'Y': 'B', 'Z': 'A'
 };
- 
+
 function atbash(user_str_atbash) {
   let cipher = '';
   for (let letter of user_str_atbash) {

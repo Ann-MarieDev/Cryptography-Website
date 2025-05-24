@@ -194,18 +194,69 @@
                 </div>
             </div>
 
+<!-----------------------------------------------------------ROT13 CYPHER--------------------------------------------------------->
+            <!--ROT13 Cipher Panel-->
             <div class="cipher-panel" id="rot13-panel">
+
+                <!--Information about the cyphers/how to use-->
                 <div class="info-box">
                     <h2>ROT13 Cipher</h2>
-                    <p>Shifts letters 13 places in alphabet.</p>
+                    <p>Shifts letters 13 places in the alphabet. Uppercase only.</p>
                 </div>
+
+                <!--Placeholders-->
                 <div class="input-container">
-                    <textarea placeholder="Coming soon..." disabled></textarea>
+                    <textarea placeholder="Enter text to encrypt/decrypt here!" id="rot13-input"></textarea>
                     <div class="controls">
-                        <button class="process-btn disabled">Coming Soon</button>
+                        <button id="rot13-button" class="process-btn">Encrypt/Decrypt</button>
                     </div>
                 </div>
+
+                <!--Output-->
+                <div class="output-container">
+                    <h3>Result:</h3>
+                    <div class="result" id="rot13-result"></div>
+                    <button class="copy-btn" data-result="rot13-result">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+
+                <!--Code box-->
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('rot13-code').textContent)">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre class="code-content"><code id="rot13-code">
+// rot 13
+let input = "HELLO WORLD";
+function rot13(text){
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let letter = text[i];
+        let code = text.charCodeAt(i);
+
+        if (code >= 65 && code <= 90){
+            if (code + 13 > 90) {
+                code = code -13;
+            } else {
+                code = code +13;
+            }
+            result += String.fromCharCode(code);
+        } else {
+            result += letter;
+        }
+    }
+    return result;
+}
+let output = rot13(input);
+console.log(output);
+                    </code></pre>
+                </div>
             </div>
+<!------------------------------------------------------------------------------------------------------------------------------->
         </div>
 
         <footer>

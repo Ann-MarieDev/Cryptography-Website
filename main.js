@@ -3,6 +3,7 @@
                             By Gracie Hutchins
 ------------------------------------------------------------------------------*/
 
+/*----------------------------HEX CONVERTER-------------------------------------*/
 function textToHex(text) {
   return text.split('').map(
     c => c.charCodeAt(0).toString(16).padStart(2, '0')
@@ -15,6 +16,7 @@ function hexToText(hex) {
   ).join('');
 }
 
+/*----------------------------BINARY CONVERTER----------------------------------*/
 function textToBinary(text) {
   return text.split('').map(
     c => c.charCodeAt(0).toString(2).padStart(8, '0')
@@ -27,6 +29,20 @@ function binaryToText(binary) {
   ).join('');
 }
 
+/*----------------------------DECIMAL CONVERTER---------------------------------*/
+function textToDec(text) {
+  return text.split('').map(
+    c => c.charCodeAt(0).toString(10)
+  ).join(' ');
+}
+
+function decToText(dec) {
+  return dec.split(' ').map(
+    d => String.fromCharCode(parseInt(d, 10))
+  ).join('');
+}
+
+/*----------------------------MORSE CODE----------------------------------------*/
 const morse = {
   "A": ".-","B": "-...","C": "-.-.","D": "-..","E": ".","F": "..-.","G": "--.","H": "....","I": "..",
   "J": ".---","K": "-.-","L": ".-..","M": "--","N": "-.","O": "---","P": ".--.","Q": "--.-","R": ".-.",
@@ -47,6 +63,7 @@ function morseToText(code) {
   return code.split(' ').map(c => textFromMorse[c] || '').join('').replace(/\//g, ' ');
 }
 
+/*----------------------------ROT 13--------------------------------------------*/
 // rot 13
 let input = "HELLO WORLD";
 function rot13(text){
@@ -71,6 +88,15 @@ function rot13(text){
 let output = rot13(input);
 console.log(output);
 
+/*----------------------------CAESAR CIPHER-------------------------------------*/
+//Info
+//alert("The Caesar Cypher is a famous cypher made and named after Julius Caesar. Caesar used this encryption method in the military to send mrssages without enemies being able to decrypt their messages. This methods takes a number, or key and whatever the number is is how many places the letters shift. So if you had the word 'Hello' and the key was one, the finished encryoted message would be 'Ifmmp'");
+
+// Variables
+//var userStr = prompt("Enter the string to encode/decode: ");
+//var userShift = parseInt(prompt("Enter the shift[key] number (can be negative):"));
+
+// Logic
 function caesar_cipher(str, num){
     var lowerCaseStr = str.toLowerCase();
     var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -96,6 +122,8 @@ function caesar_cipher(str, num){
     return newStr;    
 }
 
+/*----------------------------ATBASH CIPHER-------------------------------------*/
+// Alphabet
 let alphebet_atbash = {
 'A': 'Z', 'B': 'Y', 'C': 'X', 'D': 'W', 'E': 'V',
 'F': 'U', 'G': 'T', 'H': 'S', 'I': 'R', 'J': 'Q',
@@ -103,6 +131,7 @@ let alphebet_atbash = {
 'P': 'K', 'Q': 'J', 'R': 'I', 'S': 'H', 'T': 'G',
 'U': 'F', 'V': 'E', 'W': 'D', 'X': 'C', 'Y': 'B', 'Z': 'A'
 };
+
 function atbash(user_str_atbash) {
   let cipher = '';
   for (let letter of user_str_atbash) {
@@ -118,9 +147,14 @@ function atbash(user_str_atbash) {
   }
   return cipher;
 }
+
 function hex(){
     null;
 }
+
+/*------------------------------------------------------------------------------
+                                DOMContentLoaded
+------------------------------------------------------------------------------*/
 
 document.addEventListener('DOMContentLoaded', function() {
     const tabs = document.querySelectorAll('.cipher-tabs li');
@@ -135,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Caesar
+    // Caesar Cipher
     const caesarButton = document.getElementById('caesar-button');
     const caesarInput = document.getElementById('caesar-input');
     const shiftInput = document.getElementById('shift-input');
@@ -150,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const result = caesar_cipher(userStr, userShift);
         caesarResult.textContent = result;
     });
+
     document.getElementById('code-copy-btn').addEventListener('click', function() {
         const codeText = document.getElementById('cipher-code').textContent;
         navigator.clipboard.writeText(codeText).then(() => {
@@ -161,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Atbash
+    // Atbash Cipher
     const atbashButton = document.getElementById('atbash-button');
     const atbashInput = document.getElementById('atbash-input');
     const atbashResult = document.getElementById('atbash-result');
@@ -175,11 +210,14 @@ document.addEventListener('DOMContentLoaded', function() {
         atbashResult.textContent = result;
     });
 
-    // Hex
+    // Hex/Dec Panel
     const hexInput = document.getElementById('hex-input');
     const toHexBtn = document.getElementById('to-hex-btn');
     const fromHexBtn = document.getElementById('from-hex-btn');
+    const toDecBtn = document.getElementById('to-dec-btn');
+    const fromDecBtn = document.getElementById('from-dec-btn');
     const hexResult = document.getElementById('hex-result');
+
     if (toHexBtn) {
         toHexBtn.addEventListener('click', function() {
             const input = hexInput.value;
@@ -200,8 +238,28 @@ document.addEventListener('DOMContentLoaded', function() {
             hexResult.textContent = hexToText(input);
         });
     }
+    if (toDecBtn) {
+        toDecBtn.addEventListener('click', function() {
+            const input = hexInput.value;
+            if (!input) {
+                hexResult.textContent = 'Please enter text to convert to decimal.';
+                return;
+            }
+            hexResult.textContent = textToDec(input);
+        });
+    }
+    if (fromDecBtn) {
+        fromDecBtn.addEventListener('click', function() {
+            const input = hexInput.value;
+            if (!input) {
+                hexResult.textContent = 'Please enter decimal to convert to text.';
+                return;
+            }
+            hexResult.textContent = decToText(input);
+        });
+    }
 
-    // Binary
+    // Binary Panel
     const binaryInput = document.getElementById('binary-input');
     const toBinaryBtn = document.getElementById('to-binary-btn');
     const fromBinaryBtn = document.getElementById('from-binary-btn');
@@ -227,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Morse
+    // Morse Code Panel
     const morseInput = document.getElementById('morse-input');
     const toMorseBtn = document.getElementById('to-morse-btn');
     const fromMorseBtn = document.getElementById('from-morse-btn');
@@ -253,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ROT13
+    // ROT13 Panel
     const rot13Button = document.getElementById('rot13-button');
     const rot13Input = document.getElementById('rot13-input');
     const rot13Result = document.getElementById('rot13-result');
@@ -284,7 +342,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Please enter text to convert to binary.',
                     'Please enter binary to convert to text.',
                     'Please enter text to convert to hex.',
-                    'Please enter hex to convert to text.'
+                    'Please enter hex to convert to text.',
+                    'Please enter text to convert to decimal.',
+                    'Please enter decimal to convert to text.'
                 ].includes(resultText)
             ) {
                 navigator.clipboard.writeText(resultText).then(() => {

@@ -120,19 +120,26 @@
 <!--------------------------------------------------------HEX/DEC CIPHER----------------------------------------------------------->
             <!-- Hex/Dec Cipher Panel -->
             <div class="cipher-panel" id="hexdec-panel">
+                <!--Information about the cyphers/how to use-->
                 <div class="info-box">
                     <h2>Hex/Dec Conversion</h2>
                     <p>Convert text to/from hexadecimal (space separated, lower case) and decimal (space separated).</p>
                 </div>
+                <!--Input and Controls-->
                 <div class="input-container">
                     <textarea placeholder="Enter text, hex, or decimal here!" id="hex-input"></textarea>
                     <div class="controls" style="flex-wrap: wrap;">
+                        <!--Text to Hex Button-->
                         <button id="to-hex-btn" class="process-btn">Text to Hex</button>
+                        <!--Hex to Text Button-->
                         <button id="from-hex-btn" class="process-btn">Hex to Text</button>
+                        <!--Text to Dec Button-->
                         <button id="to-dec-btn" class="process-btn">Text to Dec</button>
+                        <!--Dec to Text Button-->
                         <button id="from-dec-btn" class="process-btn">Dec to Text</button>
                     </div>
                 </div>
+                <!--Output-->
                 <div class="output-container">
                     <h3>Result:</h3>
                     <div class="result" id="hex-result"></div>

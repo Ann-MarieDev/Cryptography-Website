@@ -154,18 +154,52 @@
                 </div>
             </div>
 
+<!-----------------------------------------------------------BINARY CYPHER--------------------------------------------------------->
             <div class="cipher-panel" id="binary-panel">
                 <div class="info-box">
                     <h2>Binary Conversion</h2>
-                    <p>Convert text to/from binary.</p>
+                    <p>Convert text to/from binary (8-bit, space separated).</p>
                 </div>
                 <div class="input-container">
-                    <textarea placeholder="Coming soon..." disabled></textarea>
+                    <textarea placeholder="Enter text or binary here!" id="binary-input"></textarea>
                     <div class="controls">
-                        <button class="process-btn disabled">Coming Soon</button>
+                        <button id="to-binary-btn" class="process-btn">Text to Binary</button>
+                        <button id="from-binary-btn" class="process-btn">Binary to Text</button>
                     </div>
                 </div>
+                <div class="output-container">
+                    <h3>Result:</h3>
+                    <div class="result" id="binary-result"></div>
+                    <button class="copy-btn" data-result="binary-result">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('binary-code').textContent)">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre class="code-content"><code id="binary-code">
+function textToBinary(text) {
+  return text.split('').map(
+    c => c.charCodeAt(0).toString(2).padStart(8, '0')
+  ).join(' ');
+}
+
+function binaryToText(binary) {
+  return binary.split(' ').map(
+    b => String.fromCharCode(parseInt(b, 2))
+  ).join('');
+}
+
+console.log(textToBinary("Hello!"));
+console.log(binaryToText("01001000 01100101 01101100 01101100 01101111 00100001"));
+                    </code></pre>
+                </div>
             </div>
+<!------------------------------------------------------------------------------------------------------------------------------->
 
 <!-----------------------------------------------------------MORSE CODE CYPHER--------------------------------------------------------->
             <!--Morse Code Cipher Panel-->

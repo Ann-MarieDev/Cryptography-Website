@@ -3,7 +3,21 @@
                             By Gracie Hutchins
 ------------------------------------------------------------------------------*/
 
-//----------------------------Morse Code Logic-----------------------------------
+function textToBinary(text) {
+  return text.split('').map(
+    c => c.charCodeAt(0).toString(2).padStart(8, '0')
+  ).join(' ');
+}
+
+function binaryToText(binary) {
+  return binary.split(' ').map(
+    b => String.fromCharCode(parseInt(b, 2))
+  ).join('');
+}
+
+console.log(textToBinary("Hello!"));
+console.log(binaryToText("01001000 01100101 01101100 01101100 01101111 00100001"));
+
 const morse = {
   "A": ".-","B": "-...","C": "-.-.","D": "-..","E": ".","F": "..-.","G": "--.","H": "....","I": "..",
   "J": ".---","K": "-.-","L": ".-..","M": "--","N": "-.","O": "---","P": ".--.","Q": "--.-","R": ".-.",
@@ -25,10 +39,6 @@ function textToMorse(text) {
 function morseToText(code) {
   return code.split(' ').map(c => textFromMorse[c] || '').join('').replace(/\//g, ' ');
 }
-
-/*------------------------------------------------------------------------------
-                                DOMContentLoaded
-------------------------------------------------------------------------------*/
 
 document.addEventListener('DOMContentLoaded', function() {
     const tabs = document.querySelectorAll('.cipher-tabs li');
@@ -91,7 +101,35 @@ document.addEventListener('DOMContentLoaded', function() {
         atbashResult.textContent = result;
     });
 
-    //----------------------------Morse Code-----------------------------------
+    //-------------------------------Binary Cipher-------------------------------
+    const binaryInput = document.getElementById('binary-input');
+    const toBinaryBtn = document.getElementById('to-binary-btn');
+    const fromBinaryBtn = document.getElementById('from-binary-btn');
+    const binaryResult = document.getElementById('binary-result');
+
+    if (toBinaryBtn) {
+        toBinaryBtn.addEventListener('click', function() {
+            const input = binaryInput.value;
+            if (!input) {
+                binaryResult.textContent = 'Please enter text to convert to binary.';
+                return;
+            }
+            binaryResult.textContent = textToBinary(input);
+        });
+    }
+
+    if (fromBinaryBtn) {
+        fromBinaryBtn.addEventListener('click', function() {
+            const input = binaryInput.value;
+            if (!input) {
+                binaryResult.textContent = 'Please enter binary to convert to text.';
+                return;
+            }
+            binaryResult.textContent = binaryToText(input);
+        });
+    }
+
+    //-------------------------------Morse Code Cipher-------------------------------
     const morseInput = document.getElementById('morse-input');
     const toMorseBtn = document.getElementById('to-morse-btn');
     const fromMorseBtn = document.getElementById('from-morse-btn');
@@ -144,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const resultId = button.getAttribute('data-result');
             const resultText = document.getElementById(resultId).textContent;
             
-            if (resultText && resultText !== 'Please enter text to encrypt/decrypt.' && resultText !== 'Please enter text to convert to Morse.' && resultText !== 'Please enter morse code to convert to text.') {
+            if (resultText && resultText !== 'Please enter text to encrypt/decrypt.' && resultText !== 'Please enter text to convert to Morse.' && resultText !== 'Please enter morse code to convert to text.' && resultText !== 'Please enter text to convert to binary.' && resultText !== 'Please enter binary to convert to text.') {
                 navigator.clipboard.writeText(resultText).then(() => {
                     const originalText = button.innerHTML;
                     button.innerHTML = '<i class="fas fa-check"></i> Copied!';
@@ -193,23 +231,6 @@ function caesar_cipher(str, num){
     return newStr;    
 }
 
-/*-------------------------------Sources----------------------------------------
-https://dev.to/cerchie/writing-a-caesar-shift-cipher-function-with-javascript-27eh
-https://www.sciencedirect.com/topics/computer-science/caesar-cipher#:~:text=The%20Caesar%20cipher%20is%20based,shifts%20in%20the%20opposite%20direction.
-https://en.wikipedia.org/wiki/Caesar_cipher
-https://www.youtube.com/watch?v=M15LVmGe8-w
-https://cryptii.com/pipes/caesar-cipher
-------------------------------------------------------------------------------*/
-
-/*----------------------------Atbash Cipher-------------------------------------
-//Info
-
-// Variables
-var user_str_atbash = prompt("Enter the string to encode/decode: ");
-
-// Logic
-// Alphabet
-*/
 let alphebet_atbash = {
 'A': 'Z', 'B': 'Y', 'C': 'X', 'D': 'W', 'E': 'V',
 'F': 'U', 'G': 'T', 'H': 'S', 'I': 'R', 'J': 'Q',
@@ -233,25 +254,11 @@ function atbash(user_str_atbash) {
   }
   return cipher;
 }
- 
-/*-------------------------------Sources----------------------------------------
-https://en.wikipedia.org/wiki/Atbash
-https://www.geeksforgeeks.org/implementing-atbash-cipher/
-https://rumkin.com/tools/cipher/atbash/
-https://www.youtube.com/watch?v=WYvHY7Kv3QU
-------------------------------------------------------------------------------*/
 
-//-------------------------------Hexdec.----------------------------------------
 function hex(){
     null;
 }
 
-//-------------------------------Binary-----------------------------------------
-function binary(){
-    null;
-}
-
-// rot 13
 let input = "HELLO WORLD";
 function rot13(text){
     let result = "";

@@ -69,7 +69,8 @@
                             <i class="fas fa-copy"></i> Copy Code
                         </button>
                     </div>
-                    <pre class="code-content"><code id="cipher-code">function caesar_cipher(str, num){
+                    <pre class="code-content"><code id="cipher-code">
+function caesar_cipher(str, num){
   var lowerCaseStr = str.toLowerCase();
   var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   var newStr = '';
@@ -92,9 +93,10 @@
       else newStr += alphabet[newIndex];
   }
   return newStr;    
-}</code></pre>
+}
+                    </code></pre>
                 </div>
-                <!--Sources already present-->
+                <!--Sources-->
                 <div class="info-box">
                     <h2>Sources:</h2>
                     <ul>
@@ -126,6 +128,39 @@
                     <button class="copy-btn" data-result="atbash-result">
                         <i class="fas fa-copy"></i> Copy
                     </button>
+                </div>
+                <!--Code box-->
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('atbash-code').textContent)">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre class="code-content"><code id="atbash-code">
+let alphebet_atbash = {
+'A': 'Z', 'B': 'Y', 'C': 'X', 'D': 'W', 'E': 'V',
+'F': 'U', 'G': 'T', 'H': 'S', 'I': 'R', 'J': 'Q',
+'K': 'P', 'L': 'O', 'M': 'N', 'N': 'M', 'O': 'L',
+'P': 'K', 'Q': 'J', 'R': 'I', 'S': 'H', 'T': 'G',
+'U': 'F', 'V': 'E', 'W': 'D', 'X': 'C', 'Y': 'B', 'Z': 'A'
+};
+function atbash(user_str_atbash) {
+  let cipher = '';
+  for (let letter of user_str_atbash) {
+    if (letter !== ' ') {
+      if (alphebet_atbash[letter]) {
+        cipher += alphebet_atbash[letter];
+      } else {
+        cipher += letter;
+      }
+    } else {
+        cipher += ' ';
+    }
+  }
+  return cipher;
+}
+                    </code></pre>
                 </div>
                 <!-- OFFICIAL SOURCES -->
                 <div class="info-box">
@@ -163,6 +198,37 @@
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
+                <!--Code box-->
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('hex-code').textContent)">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre class="code-content"><code id="hex-code">
+function textToHex(text) {
+  return text.split('').map(
+    c => c.charCodeAt(0).toString(16).padStart(2, '0')
+  ).join(' ');
+}
+function hexToText(hex) {
+  return hex.split(' ').map(
+    h => String.fromCharCode(parseInt(h, 16))
+  ).join('');
+}
+function textToDec(text) {
+  return text.split('').map(
+    c => c.charCodeAt(0).toString(10)
+  ).join(' ');
+}
+function decToText(dec) {
+  return dec.split(' ').map(
+    d => String.fromCharCode(parseInt(d, 10))
+  ).join('');
+}
+                    </code></pre>
+                </div>
                 <!-- OFFICIAL SOURCES -->
                 <div class="info-box">
                     <h2>Sources:</h2>
@@ -197,6 +263,27 @@
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
+                <!--Code box-->
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('binary-code').textContent)">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre class="code-content"><code id="binary-code">
+function textToBinary(text) {
+  return text.split('').map(
+    c => c.charCodeAt(0).toString(2).padStart(8, '0')
+  ).join(' ');
+}
+function binaryToText(binary) {
+  return binary.split(' ').map(
+    b => String.fromCharCode(parseInt(b, 2))
+  ).join('');
+}
+                    </code></pre>
+                </div>
                 <!-- OFFICIAL SOURCES -->
                 <div class="info-box">
                     <h2>Sources:</h2>
@@ -228,6 +315,35 @@
                         <i class="fas fa-copy"></i> Copy
                     </button>
                 </div>
+                <!--Code box-->
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('morse-code').textContent)">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre class="code-content"><code id="morse-code">
+const morse = {
+  "A": ".-","B": "-...","C": "-.-.","D": "-..","E": ".","F": "..-.","G": "--.","H": "....","I": "..",
+  "J": ".---","K": "-.-","L": ".-..","M": "--","N": "-.","O": "---","P": ".--.","Q": "--.-","R": ".-.",
+  "S": "...","T": "-","U": "..-","V": "...-","W": ".--","X": "-..-","Y": "-.--","Z": "--..",
+  "0": "-----","1": ".----","2": "..---","3": "...--","4": "....-","5": ".....","6": "-....",
+  "7": "--...","8": "---..","9": "----."," ": "/",
+  ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.", "!": "-.-.--", "/": "-..-.", 
+  "(": "-.--.", ")": "-.--.-", "&": ".-...", ":": "---...", ";": "-.-.-.", "=": "-...-", 
+  "+": ".-.-.", "-": "-....-", "_": "..--.-", '"': ".-..-.", "$": "...-..-", "@": ".--.-."
+};
+const textFromMorse = {};
+for (let k in morse) textFromMorse[morse[k]] = k;
+function textToMorse(text) {
+  return text.toUpperCase().split('').map(c => morse[c] || '').join(' ').replace(/ +/g, ' ').trim();
+}
+function morseToText(code) {
+  return code.split(' ').map(c => textFromMorse[c] || '').join('').replace(/\//g, ' ');
+}
+                    </code></pre>
+                </div>
                 <!-- OFFICIAL SOURCES -->
                 <div class="info-box">
                     <h2>Sources:</h2>
@@ -257,6 +373,40 @@
                     <button class="copy-btn" data-result="rot13-result">
                         <i class="fas fa-copy"></i> Copy
                     </button>
+                </div>
+                <!--Code box-->
+                <div class="code-display-container">
+                    <div class="code-header">
+                        <h3>(◕‿◕) Here's the code:</h3>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('rot13-code').textContent)">
+                            <i class="fas fa-copy"></i> Copy Code
+                        </button>
+                    </div>
+                    <pre class="code-content"><code id="rot13-code">
+// rot 13
+let input = "HELLO WORLD";
+function rot13(text){
+    let result = "";
+    for(let i = 0; i < text.length; i++) {
+        let letter = text[i];
+        let code = text.charCodeAt(i);
+
+        if (code >= 65 && code <= 90){
+            if (code + 13 > 90) {
+                code = code -13;
+            } else {
+                code = code +13;
+            }
+            result += String.fromCharCode(code);
+        } else {
+            result += letter;
+        }
+    }
+    return result;
+}
+let output = rot13(input);
+console.log(output);
+                    </code></pre>
                 </div>
                 <!-- OFFICIAL SOURCES -->
                 <div class="info-box">
